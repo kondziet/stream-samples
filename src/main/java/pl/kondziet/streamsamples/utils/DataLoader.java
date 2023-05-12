@@ -2,7 +2,7 @@ package pl.kondziet.streamsamples.utils;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import pl.kondziet.streamsamples.model.User;
+import pl.kondziet.streamsamples.model.entities.User;
 import pl.kondziet.streamsamples.repositories.UserRepository;
 
 @Component

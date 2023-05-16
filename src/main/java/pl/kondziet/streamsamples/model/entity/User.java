@@ -1,4 +1,4 @@
-package pl.kondziet.streamsamples.model.entities;
+package pl.kondziet.streamsamples.model.entity;
 
 import jakarta.persistence.*;
 

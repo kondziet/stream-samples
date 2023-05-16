@@ -1,9 +1,9 @@
-package pl.kondziet.streamsamples.utils;
+package pl.kondziet.streamsamples.util;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import pl.kondziet.streamsamples.model.entities.User;
-import pl.kondziet.streamsamples.repositories.UserRepository;
+import pl.kondziet.streamsamples.model.entity.User;
+import pl.kondziet.streamsamples.repository.UserRepository;
 
 @Component
 public class DataLoader implements CommandLineRunner {

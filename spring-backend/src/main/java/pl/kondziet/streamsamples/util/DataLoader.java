@@ -16,13 +16,15 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User user1 = new User();
-        user1.setUsername("michaelScott");
-        user1.setActive(false);
+        User user1 = User.builder()
+                .username("michaelScott")
+                .active(false)
+                .build();
 
-        User user2 = new User();
-        user2.setUsername("dwightSchrute");
-        user2.setActive(false);
+        User user2 = User.builder()
+                .username("dwightSchrute")
+                .active(false)
+                .build();
 
         userRepository.save(user1);
         userRepository.save(user2);

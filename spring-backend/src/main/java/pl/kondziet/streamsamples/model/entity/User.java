@@ -24,8 +24,8 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String nickname;
     private String email;
-    private String username;
     private String password;
     @Enumerated(value = EnumType.STRING)
     private Role role;
@@ -34,6 +34,15 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override

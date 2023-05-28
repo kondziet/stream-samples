@@ -1,5 +1,6 @@
 package pl.kondziet.streamsamples.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,15 +11,12 @@ import pl.kondziet.streamsamples.repository.UserRepository;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController()
 @RequestMapping("/api/users")
 public class UserController {
 
     private UserRepository userRepository;
-
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @GetMapping()
     public ResponseEntity<List<User>> get() {

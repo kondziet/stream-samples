@@ -17,12 +17,12 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         User user1 = User.builder()
-                .username("michaelScott")
+                .nickname("michaelScott")
                 .active(false)
                 .build();
 
         User user2 = User.builder()
-                .username("dwightSchrute")
+                .nickname("dwightSchrute")
                 .active(false)
                 .build();
 

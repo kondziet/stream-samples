@@ -3,6 +3,7 @@ package pl.kondziet.streamsamples.security;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -15,6 +16,7 @@ import pl.kondziet.streamsamples.security.jwt.JwtVerifyFilter;
 public class SecurityConfiguration {
 
     private JwtVerifyFilter jwtVerifyFilter;
+    private AuthenticationProvider authenticationProvider;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -30,7 +32,7 @@ public class SecurityConfiguration {
 
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        httpSecurity.authenticationProvider()
+        httpSecurity.authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtVerifyFilter, UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();

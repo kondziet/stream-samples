@@ -13,7 +13,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController()
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserController {
 
     private UserRepository userRepository;

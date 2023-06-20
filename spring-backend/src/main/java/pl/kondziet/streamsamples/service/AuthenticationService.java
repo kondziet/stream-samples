@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.kondziet.streamsamples.model.DTO.AuthenticationRequest;
 import pl.kondziet.streamsamples.model.DTO.AuthenticationResponse;
-import pl.kondziet.streamsamples.model.DTO.SignupRequest;
+import pl.kondziet.streamsamples.model.DTO.RegisterRequest;
 import pl.kondziet.streamsamples.model.entity.User;
 import pl.kondziet.streamsamples.model.enums.Role;
 import pl.kondziet.streamsamples.repository.UserRepository;
@@ -22,11 +22,11 @@ public class AuthenticationService {
     private JwtService jwtService;
     private AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(SignupRequest signupRequest) {
+    public AuthenticationResponse register(RegisterRequest registerRequest) {
         User user = User.builder()
-                .nickname(signupRequest.getNickname())
-                .email(signupRequest.getEmail())
-                .password(passwordEncoder.encode(signupRequest.getPassword()))
+                .nickname(registerRequest.getNickname())
+                .email(registerRequest.getEmail())
+                .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .active(false)
                 .role(Role.USER)
                 .build();

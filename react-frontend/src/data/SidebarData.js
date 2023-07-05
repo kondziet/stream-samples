@@ -1,16 +1,3 @@
-export const postCategoryData = [
-    {
-        id: 1,
-        label: "Regular posts",
-        value: "regular"
-    },
-    {
-        id: 2,
-        label: "Task solutions",
-        value: "solution"
-    },
-];
-
 export const streamCategoryData = [
     {
         id: 1,

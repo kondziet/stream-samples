@@ -1,4 +1,4 @@
-package pl.kondziet.streamsamples.security.jwt;
+package pl.kondziet.streamsamples.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

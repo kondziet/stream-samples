@@ -9,6 +9,7 @@ import pl.kondziet.streamsamples.model.DTO.RegisterRequest;
 import pl.kondziet.streamsamples.service.AuthenticationService;
 
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController()
 @RequestMapping("/api/authentication")
 public class AuthenticationController {

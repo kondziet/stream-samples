@@ -1,13 +1,18 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 const AuthenticationContext = createContext();
 
 function AuthenticationProvider({ children }) {
 
     const [authentication, setAuthentication] = useState({});
+    const [userAuthenticated, setUserAuthenticated] = useState(false);
+
+    useEffect(() => {
+        setUserAuthenticated(!!authentication.accessToken);
+    }, [authentication]);
 
     return(
-        <AuthenticationContext.Provider value={{ authentication, setAuthentication }}>
+        <AuthenticationContext.Provider value={{ authentication, setAuthentication, userAuthenticated }}>
             {children}
         </AuthenticationContext.Provider>
     );

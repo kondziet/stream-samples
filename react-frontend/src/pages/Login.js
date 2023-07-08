@@ -36,7 +36,6 @@ function Login() {
             setPassword("");
             setSuccess(true);
         } catch (error) {
-            console.log(error);
             if (!error?.response) {
                 setErrorMsg("No server response");
             } else if (error.response?.status === 400) {

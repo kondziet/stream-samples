@@ -12,16 +12,17 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "posts")
+@Table(name = "POSTS")
 public class Post implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    @Column(length = 5000)
+    private String code;
     @ManyToOne
     @EqualsAndHashCode.Exclude
     private User author;
-    @Column(length = 5000)
-    private String code;
+
 }

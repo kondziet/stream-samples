@@ -9,7 +9,7 @@ import Logout from "./pages/Logout";
 function App() {
 
   return (
-    <div className="App">
+    <div className="flex flex-col items-center h-screen">
       <Sidebar />
       <Routes>
         <Route path="/" element={<Posts />} />

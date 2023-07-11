@@ -1,7 +1,7 @@
 function Profile() {
 
     return(
-        <div>
+        <div className="w-screen flex-grow max-w-[1240px]">
             <h1>Profile</h1>
         </div>
     );

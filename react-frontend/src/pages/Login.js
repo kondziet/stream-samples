@@ -49,13 +49,13 @@ function Login() {
     };
 
     return(
-        <div className="flex justify-center items-center bg-green-500/50">
+        <div className="flex justify-center bg-stone-200 w-screen flex-grow max-w-[1240px]">
             {success ? (
-                <div>
+                <div className="mt-12">
                     <h1>you have successfully logged in!</h1>
                 </div>
             ) : (
-                <div>
+                <div className="flex flex-col items-center pt-10 w-72 h-72 border border-black mt-20 md:mt-44">
                     <h1>Login</h1>
                     <form onSubmit={handleSubmit} className="flex flex-col">
                         <label>email:</label>
@@ -63,7 +63,7 @@ function Login() {
                         <label>Password:</label>
                         <input value={password} onChange={(event) => setPassword(event.target.value)} type="password" required />
                         <p ref={errorRef} className={errorMsg ? "font-bold" : "hidden"}>{errorMsg}</p>
-                        <button>Log in</button>
+                        <button className="rounded border border-black mt-4 p-2">Log in</button>
                     </form>
                 </div>
             )}

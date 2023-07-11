@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import clientRequest from "../api/clientRequest";
 import Post from "../components/Post";
-import usePrivateClientRequest from "../hooks/usePrivateClientRequest";
 
 function Posts() {
     const [posts, setPosts] = useState([]);
-    const privateClientRequest = usePrivateClientRequest();
 
     useEffect(() => {
         let isMounted = true;
@@ -18,12 +16,13 @@ function Posts() {
 
         const getPosts = async () => {
             try {
-                const response = await privateClientRequest.get("/api/posts", {
+                const response = await clientRequest.get("/api/posts/home", {
                     signal: abortController.signal
                 });
                 if (isMounted) {
                     setPosts(response.data);
                 }
+
             } catch (error) {
                 console.error(error);
             }
@@ -34,15 +33,14 @@ function Posts() {
         return cleanup;
     }, []);
 
-    const renderedPosts = posts.map(post => {
+    const renderedPosts = posts.map((post, index) => {
         return(
-            <Post post={post} />
+            <Post key={index} post={post} />
         );
     });
 
     return(
-        <div>
-            <h1>Posts</h1>
+        <div className="flex flex-col items-center w-screen flex-grow max-w-[1240px]">
             {renderedPosts}
         </div>
     );

@@ -17,49 +17,66 @@ import {
   BiLogOut
 } from "react-icons/bi"
 
-import { Link } from "react-router-dom";
+import {
+  GrAddCircle
+} from "react-icons/gr"
+
+import { Link, useNavigate } from "react-router-dom";
 import useAuthenticationContext from "../hooks/useAuthentication";
 
 function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const { userAuthenticated, setAuthentication } = useAuthenticationContext();
+  const navigate = useNavigate();
 
   const handleSidebarToggle = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
+  const handleSidebarProfile = () => {
+    if (userAuthenticated) {
+      navigate("/profile")
+    } else {
+      navigate("/login")
+    }
+  };
+
   const handleSidebarLogout = () => {
     setAuthentication({});
+    navigate("/logout");
   };
 
   return(
-    <div className="flex justify-between items-center h-20 max-w-[1240px] mx-auto px-4">
+    <div className="w-screen flex justify-between items-center h-20 max-w-[1240px] mx-auto px-4 border rounded">
       <h1 className="text-3xl font-bold text-[#14551f]">Stream Samples</h1>
-        <div className="hidden md:flex">
-          Search
-        </div>
+          { userAuthenticated ? (
+            <div onClick={handleSidebarLogout} className="hidden md:flex gap-2 items-center p-4 rounded-xl border-2 hover:bg-stone-200 cursor-pointer">
+              <GrAddCircle size={20} />Create sample
+            </div>
+          ) : (<div></div>)}
         <ul className="hidden md:flex">
           <li>
-            <Link to={"/"} className="flex gap-2 items-center p-4">
+            <Link to={"/"} className="flex gap-2 items-center p-4 rounded-xl hover:bg-stone-200">
               <AiOutlineHome size={20} />Home
             </Link>
           </li>
           <li>
-            <Link to={"/categories"} className="flex gap-2 items-center p-4">
+            <Link to={"/categories"} className="flex gap-2 items-center p-4 rounded-xl hover:bg-stone-200">
               <TbCategory size={20} />Categories
             </Link>
           </li>
           <li>
-            <Link to={"/login"} className="flex gap-2 items-center p-4">
+            <div onClick={handleSidebarProfile} className="flex gap-2 items-center p-4 rounded-xl hover:bg-stone-200 cursor-pointer">
               <CgProfile size={20} />Profile
-            </Link>
+            </div>
           </li>
           
           { userAuthenticated ? (
             <li>
-              <Link onClick={handleSidebarLogout} to={"/logout"} className="flex gap-2 items-center p-4">
+              <div onClick={handleSidebarLogout} className="flex gap-2 items-center p-4 rounded-xl hover:bg-red-200 cursor-pointer">
                 <BiLogOut size={20} />Logout
-              </Link>
+              </div>
             </li>
           ) : (<div></div>)}
         </ul>
@@ -70,6 +87,7 @@ function Sidebar() {
           <li className="flex gap-2 items-center p-4 border-b "><AiOutlineHome size={20} />Home</li>
           <li className="flex gap-2 items-center p-4 border-b "><TbCategory size={20} />Categories</li>
           <li className="flex gap-2 items-center p-4 border-b "><CgProfile size={20} />Profile</li>
+          <li className="flex gap-2 items-center p-4 border-b "><BiLogOut size={20} />Logout</li>
         </ul>
     </div>
   );

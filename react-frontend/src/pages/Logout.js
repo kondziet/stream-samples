@@ -1,7 +1,7 @@
 function Logout() {
 
     return(
-        <div>
+        <div className="w-screen flex-grow max-w-[1240px]">
             <h1>Logout</h1>
         </div>
     );

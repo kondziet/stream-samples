@@ -14,7 +14,7 @@ import pl.kondziet.streamsamples.model.repository.UserRepository;
 import java.util.List;
 
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 @RestController()
 @RequestMapping("/api/users")
 public class UserController {

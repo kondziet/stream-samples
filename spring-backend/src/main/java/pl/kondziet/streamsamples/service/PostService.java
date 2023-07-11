@@ -4,5 +4,6 @@ import pl.kondziet.streamsamples.model.entity.Post;
 
 public interface PostService {
 
-    public void addNewPost(Post post);
+    void addNewPost(Post post);
+    Long addPostToLiked(String userEmail, Long postId);
 }

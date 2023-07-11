@@ -11,10 +11,12 @@ import pl.kondziet.streamsamples.model.DTO.PostPOST;
 import pl.kondziet.streamsamples.model.entity.Post;
 import pl.kondziet.streamsamples.model.entity.User;
 import pl.kondziet.streamsamples.model.repository.PostRepository;
+import pl.kondziet.streamsamples.model.subselects.PostWithLikes;
 import pl.kondziet.streamsamples.service.PostService;
 import pl.kondziet.streamsamples.service.UserService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @AllArgsConstructor
@@ -27,38 +29,29 @@ public class PostController {
     private PostService postService;
     private UserService userService;
 
-    @PostMapping
-    public ResponseEntity<PostGET> addNewUserPost(Authentication authentication, @RequestBody PostPOST newPost) {
 
-        User user = userService.findByEmail(authentication.getName());
-
-        Post post = Post.builder()
-                .author(user)
-                .title(newPost.getTitle())
-                .code(newPost.getCode())
-                .build();
-
-        postService.addNewPost(post);
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(PostGET.builder()
-                        .authorNickname(user.getNickname())
-                        .title(post.getTitle())
-                        .code(post.getCode())
-                        .build()
-                );
-    }
-
-    @GetMapping
-    public ResponseEntity<List<PostGET>> getAllPosts() {
+    @GetMapping("/home")
+    public ResponseEntity<List<PostGET>> getPostsWithLikes() {
         return ResponseEntity.ok(
-                postRepository.findAll().stream()
+                postRepository.findPostsWithLikes().stream()
                         .map(post -> PostGET.builder()
-                                .authorNickname(post.getAuthor().getNickname())
+                                .postCategory(post.getPostCategory().name())
+                                .postId(post.getPostId())
                                 .title(post.getTitle())
+                                .likesCount(post.getLikesCount())
+                                .authorNickname(post.getUser().getNickname())
+                                .description(post.getDescription())
                                 .code(post.getCode())
-                                .build()).toList()
+                                .build()
+                        ).collect(Collectors.toList())
         );
     }
+
+    @PostMapping("/{postId}/likes")
+    public ResponseEntity<Long> likePost(Authentication authentication, @PathVariable Long postId) {
+        return ResponseEntity.ok(
+                postService.addPostToLiked(authentication.getName(), postId)
+        );
+    }
+
 }

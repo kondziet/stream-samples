@@ -27,10 +27,20 @@ public class User implements UserDetails, Serializable {
     @Enumerated(value = EnumType.STRING)
     private Role role;
     private boolean active;
-    @OneToMany(mappedBy = "author")
     @EqualsAndHashCode.Exclude
     @Builder.Default
+    @OneToMany(mappedBy = "author")
     private Set<Post> posts = new HashSet<>();
+
+    @EqualsAndHashCode.Exclude
+    @Builder.Default
+    @ManyToMany()
+    @JoinTable(
+            name = "USER_POST_LIKES",
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "POST_ID")
+    )
+    private Set<Post> likedPosts = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

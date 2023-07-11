@@ -1,7 +1,7 @@
-package pl.kondziet.streamsamples.model.DTO;
+package pl.kondziet.streamsamples.model.subselects;
+
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.kondziet.streamsamples.model.entity.User;
@@ -10,12 +10,11 @@ import pl.kondziet.streamsamples.model.enums.PostCategory;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class PostGET {
+public class PostWithLikes {
 
     private Long postId;
-    private String authorNickname;
-    private String postCategory;
+    private User user;
+    private PostCategory postCategory;
     private String title;
     private String description;
     private String code;

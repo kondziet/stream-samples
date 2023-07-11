@@ -55,10 +55,10 @@ function Login() {
                     <h1>you have successfully logged in!</h1>
                 </div>
             ) : (
-                <div className="flex flex-col items-center pt-10 w-72 h-72 border border-black mt-20 md:mt-44">
+                <div className="flex flex-col items-center pt-10 w-72 h-72 border border-stone-600 rounded-xl border-black mt-20 md:mt-44">
                     <h1>Login</h1>
                     <form onSubmit={handleSubmit} className="flex flex-col">
-                        <label>email:</label>
+                        <label>Email:</label>
                         <input ref={emailRef} value={email} onChange={(event) => setEmail(event.target.value)} type="text" required />
                         <label>Password:</label>
                         <input value={password} onChange={(event) => setPassword(event.target.value)} type="password" required />

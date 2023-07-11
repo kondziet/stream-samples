@@ -20,13 +20,14 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable();
         httpSecurity.cors(Customizer.withDefaults());
+
+        httpSecurity.csrf().disable();
         httpSecurity.formLogin().disable();
 
         httpSecurity.authorizeHttpRequests(request -> request
-//                .requestMatchers("/api/posts")
-//                .permitAll()
+                .requestMatchers("/api/posts/home")
+                .permitAll()
                 .requestMatchers("api/authentication/**")
                 .permitAll()
                 .anyRequest()

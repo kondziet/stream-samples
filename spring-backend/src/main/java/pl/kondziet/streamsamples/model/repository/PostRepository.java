@@ -27,6 +27,23 @@ SELECT NEW pl.kondziet.streamsamples.model.subselects.PostWithLikes(
 FROM Post p
 """)
     List<PostWithLikes> findPostsWithLikes();
+    @Query("""
+SELECT NEW pl.kondziet.streamsamples.model.subselects.PostWithLikes(
+    p.id, 
+    p.author, 
+    p.postCategory, 
+    p.title,
+    p.description, 
+    p.code, (
+        SELECT COUNT(upl)
+        FROM UserPostLikes upl
+        WHERE upl.post.id = p.id
+    )
+)
+FROM Post p
+WHERE p.id = :postId
+""")
+    PostWithLikes findPostWithLikesById(@Param("postId") Long id);
 
     @Query("""
 SELECT NEW pl.kondziet.streamsamples.model.subselects.PostWithLikes(p.id, p.author, p.postCategory, p.description, p.code, COUNT(upl))

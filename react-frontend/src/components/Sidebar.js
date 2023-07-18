@@ -51,10 +51,10 @@ function Sidebar() {
     <div className="w-screen flex justify-between items-center h-20 max-w-[1240px] mx-auto px-4 border rounded">
       <h1 className="text-3xl font-bold text-[#14551f]">Stream Samples</h1>
           { userAuthenticated ? (
-            <div onClick={handleSidebarLogout} className="hidden md:flex gap-2 items-center p-4 rounded-xl border-2 hover:bg-stone-200 cursor-pointer">
+            <Link to={"/create-post"} className="hidden md:flex gap-2 items-center p-4 rounded-xl hover:bg-stone-200 cursor-pointer">
               <GrAddCircle size={20} />Create sample
-            </div>
-          ) : (<div></div>)}
+            </Link>
+          ) : (<></>)}
         <ul className="hidden md:flex">
           <li>
             <Link to={"/"} className="flex gap-2 items-center p-4 rounded-xl hover:bg-stone-200">
@@ -78,7 +78,7 @@ function Sidebar() {
                 <BiLogOut size={20} />Logout
               </div>
             </li>
-          ) : (<div></div>)}
+          ) : (<></>)}
         </ul>
           <div onClick={handleSidebarToggle} className="block md:hidden">
             {sidebarOpen ? <AiOutlineClose size={20} className="cursor-pointer" /> : <AiOutlineMenu size={20} className="cursor-pointer" />}

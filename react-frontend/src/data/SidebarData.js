@@ -1,77 +1,62 @@
 export const streamCategoryData = [
     {
-        id: 1,
-        label: "Filtering",
-        value: "filtering"
+      id: 1,
+      value: "FILTERING"
     },
     {
-        id: 2,
-        label: "Mapping",
-        value: "mapping"
+      id: 2,
+      value: "MAPPING"
     },
     {
-        id: 3,
-        label: "Sorting",
-        value: "sorting"
+      id: 3,
+      value: "SORTING"
     },
     {
-        id: 4,
-        label: "Aggregation",
-        value: "aggregation"
+      id: 4,
+      value: "AGGREGATION"
     },
     {
-        id: 5,
-        label: "Matching",
-        value: "matching"
+      id: 5,
+      value: "MATCHING"
     },
     {
-        id: 6,
-        label: "Searching",
-        value: "searching"
+      id: 6,
+      value: "SEARCHING"
     },
     {
-        id: 7,
-        label: "Limiting",
-        value: "limiting"
+      id: 7,
+      value: "LIMITING"
     },
     {
-        id: 8,
-        label: "Skipping",
-        value: "skipping"
+      id: 8,
+      value: "SKIPPING"
     },
     {
-        id: 9,
-        label: "Distinct",
-        value: "distinct"
+      id: 9,
+      value: "DISTINCT"
     },
     {
-        id: 10,
-        label: "Reducing",
-        value: "reducing"
+      id: 10,
+      value: "REDUCING"
     },
     {
-        id: 11,
-        label: "Collecting",
-        value: "collecting"
+      id: 11,
+      value: "COLLECTING"
     },
     {
-        id: 12,
-        label: "Iterating",
-        value: "iterating"
+      id: 12,
+      value: "ITERATING"
     },
     {
-        id: 13,
-        label: "Generating",
-        value: "generating"
+      id: 13,
+      value: "GENERATING"
     },
     {
-        id: 14,
-        label: "Combining",
-        value: "combining"
+      id: 14,
+      value: "COMBINING"
     },
     {
-        id: 15,
-        label: "Parallel Processing",
-        value: "parallel"
+      id: 15,
+      value: "PARALLEL_PROCESSING"
     }
-];
+  ];

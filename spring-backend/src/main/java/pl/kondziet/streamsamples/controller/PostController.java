@@ -25,32 +25,76 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/posts")
 public class PostController {
 
-    private PostRepository postRepository;
     private PostService postService;
     private UserService userService;
 
 
     @GetMapping("/home")
-    public ResponseEntity<List<PostGET>> getPostsWithLikes() {
+    public ResponseEntity<List<PostGET>> getPosts() {
+        List<PostGET> postsWithLikes = postService.getPostsWithLikes().stream()
+                .map(post -> PostGET.builder()
+                        .postCategory(post.getPostCategory().name())
+                        .postId(post.getPostId())
+                        .title(post.getTitle())
+                        .likesCount(post.getLikesCount())
+                        .authorNickname(post.getUser().getNickname())
+                        .description(post.getDescription())
+                        .code(post.getCode())
+                        .build()
+                ).collect(Collectors.toList());
+
         return ResponseEntity.ok(
-                postRepository.findPostsWithLikes().stream()
-                        .map(post -> PostGET.builder()
-                                .postCategory(post.getPostCategory().name())
-                                .postId(post.getPostId())
-                                .title(post.getTitle())
-                                .likesCount(post.getLikesCount())
-                                .authorNickname(post.getUser().getNickname())
-                                .description(post.getDescription())
-                                .code(post.getCode())
-                                .build()
-                        ).collect(Collectors.toList())
+            postsWithLikes
         );
+    }
+
+    @GetMapping("/{postId}")
+    public ResponseEntity<PostGET> getPost(@PathVariable Long postId) {
+        PostWithLikes post = postService.getPostWithLikes(postId);
+        PostGET postWithLikes = PostGET.builder()
+                .postId(post.getPostId())
+                .authorNickname(post.getUser().getNickname())
+                .postCategory(post.getPostCategory().name())
+                .title(post.getTitle())
+                .description(post.getDescription())
+                .code(post.getCode())
+                .likesCount(post.getLikesCount())
+                .build();
+
+        return ResponseEntity.ok(
+            postWithLikes
+        );
+    }
+
+
+    @PostMapping("/")
+    public ResponseEntity<Long> addPost(Authentication authentication, @RequestBody PostPOST postPOST) {
+        User user = userService.findByEmail(authentication.getName());
+
+        Post post = Post.builder()
+                .title(postPOST.getTitle())
+                .description(postPOST.getDescription())
+                .postCategory(postPOST.getPostCategory())
+                .code(postPOST.getCode())
+                .author(user)
+                .build();
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(postService.addNewPost(post));
     }
 
     @PostMapping("/{postId}/likes")
     public ResponseEntity<Long> likePost(Authentication authentication, @PathVariable Long postId) {
         return ResponseEntity.ok(
                 postService.addPostToLiked(authentication.getName(), postId)
+        );
+    }
+
+    @DeleteMapping("/{postId}/likes")
+    public ResponseEntity<Long> unlikePost(Authentication authentication, @PathVariable Long postId) {
+        return ResponseEntity.ok(
+                postService.removePostFromLiked(authentication.getName(), postId)
         );
     }
 

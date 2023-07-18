@@ -18,6 +18,7 @@ function Post({ post }) {
         if (postLiked) {
             setPostLiked(liked => !liked);
             setPostLikesCount(count => count - 1);
+            await privateClientRequest.delete(`/api/posts/${post.postId}/likes`)
         } else {
             setPostLiked(liked => !liked);
             setPostLikesCount(count => count + 1);
@@ -47,7 +48,7 @@ function Post({ post }) {
                 ) : (
                     <FaRegHeart onClick={handlePostLike} className="cursor-pointer" size={20} />
                 )}
-                <h1>{postLikesCount}</h1>
+                <h1>{postLikesCount ? postLikesCount : 0}</h1>
             </div>
 
         </div>

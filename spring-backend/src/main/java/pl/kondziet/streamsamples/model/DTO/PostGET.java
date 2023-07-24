@@ -20,5 +20,6 @@ public class PostGET {
     private String description;
     private String code;
     private Long likesCount;
+    private Long commentsCount;
 
 }

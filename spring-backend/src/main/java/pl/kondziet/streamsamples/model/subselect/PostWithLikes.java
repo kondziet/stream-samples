@@ -1,4 +1,4 @@
-package pl.kondziet.streamsamples.model.subselects;
+package pl.kondziet.streamsamples.model.subselect;
 
 
 import lombok.AllArgsConstructor;
@@ -19,5 +19,6 @@ public class PostWithLikes {
     private String description;
     private String code;
     private Long likesCount;
+    private Long commentsCount;
 
 }

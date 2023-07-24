@@ -32,6 +32,10 @@ public class Post implements Serializable {
     @EqualsAndHashCode.Exclude
     @ManyToOne
     private User author;
+    @EqualsAndHashCode.Exclude
+    @Builder.Default
+    @OneToMany(mappedBy = "post")
+    private Set<Comment> comments = new HashSet<>();
 
     @EqualsAndHashCode.Exclude
     @Builder.Default

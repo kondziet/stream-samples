@@ -1,6 +1,5 @@
 package pl.kondziet.streamsamples.controller;
 
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +9,7 @@ import pl.kondziet.streamsamples.model.DTO.PostGET;
 import pl.kondziet.streamsamples.model.DTO.PostPOST;
 import pl.kondziet.streamsamples.model.entity.Post;
 import pl.kondziet.streamsamples.model.entity.User;
-import pl.kondziet.streamsamples.model.repository.PostRepository;
-import pl.kondziet.streamsamples.model.subselects.PostWithLikes;
+import pl.kondziet.streamsamples.model.subselect.PostWithLikes;
 import pl.kondziet.streamsamples.service.PostService;
 import pl.kondziet.streamsamples.service.UserService;
 
@@ -37,6 +35,7 @@ public class PostController {
                         .postId(post.getPostId())
                         .title(post.getTitle())
                         .likesCount(post.getLikesCount())
+                        .commentsCount(post.getCommentsCount())
                         .authorNickname(post.getUser().getNickname())
                         .description(post.getDescription())
                         .code(post.getCode())
@@ -59,6 +58,7 @@ public class PostController {
                 .description(post.getDescription())
                 .code(post.getCode())
                 .likesCount(post.getLikesCount())
+                .commentsCount(post.getCommentsCount())
                 .build();
 
         return ResponseEntity.ok(

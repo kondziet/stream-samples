@@ -28,6 +28,8 @@ public class SecurityConfiguration {
         httpSecurity.authorizeHttpRequests(request -> request
                 .requestMatchers("/api/posts/home")
                 .permitAll()
+                .requestMatchers("/api/comments/**")
+                .permitAll()
                 .requestMatchers("api/authentication/**")
                 .permitAll()
                 .anyRequest()

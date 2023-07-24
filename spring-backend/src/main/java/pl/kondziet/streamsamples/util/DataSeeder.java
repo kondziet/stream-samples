@@ -11,9 +11,11 @@ import pl.kondziet.streamsamples.model.entity.User;
 import pl.kondziet.streamsamples.model.entity.UserPostLikes;
 import pl.kondziet.streamsamples.model.enums.PostCategory;
 import pl.kondziet.streamsamples.model.enums.Role;
+import pl.kondziet.streamsamples.model.repository.CommentRepository;
 import pl.kondziet.streamsamples.model.repository.PostRepository;
 import pl.kondziet.streamsamples.model.repository.UserPostLikesRepository;
 import pl.kondziet.streamsamples.model.repository.UserRepository;
+import pl.kondziet.streamsamples.model.entity.Comment;
 
 @AllArgsConstructor
 @Component
@@ -21,6 +23,7 @@ public class DataSeeder implements CommandLineRunner {
 
     private final UserRepository userRepository;
     private final PostRepository postRepository;
+    private final CommentRepository commentRepository;
     private final UserPostLikesRepository userPostLikesRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -82,5 +85,16 @@ public class DataSeeder implements CommandLineRunner {
         postRepository.save(post1);
         userRepository.save(user1);
         userPostLikesRepository.save(userPostLikes1);
+
+        Comment comment1 = Comment.builder()
+                .author(user1)
+                .post(post1)
+                .content("Nice solution :)")
+                .build();
+
+        user1.getComments().add(comment1);
+        post1.getComments().add(comment1);
+
+        commentRepository.save(comment1);
     }
 }

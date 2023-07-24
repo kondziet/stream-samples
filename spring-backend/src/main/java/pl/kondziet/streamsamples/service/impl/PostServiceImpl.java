@@ -2,19 +2,15 @@ package pl.kondziet.streamsamples.service.impl;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import pl.kondziet.streamsamples.model.DTO.PostGET;
 import pl.kondziet.streamsamples.model.entity.Post;
 import pl.kondziet.streamsamples.model.entity.User;
 import pl.kondziet.streamsamples.model.repository.PostRepository;
 import pl.kondziet.streamsamples.model.repository.UserRepository;
-import pl.kondziet.streamsamples.model.subselects.PostWithLikes;
+import pl.kondziet.streamsamples.model.subselect.PostWithLikes;
 import pl.kondziet.streamsamples.service.PostService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -22,6 +18,11 @@ public class PostServiceImpl implements PostService {
 
     private PostRepository postRepository;
     private UserRepository userRepository;
+
+    @Override
+    public Post findPostById(Long postId) {
+        return postRepository.findById(postId).orElse(null);
+    }
 
     @Override
     public Long addNewPost(Post post) {
@@ -50,6 +51,11 @@ public class PostServiceImpl implements PostService {
         post.getUsersWhoLiked().remove(user);
 
         return postId;
+    }
+
+    @Override
+    public List<PostWithLikes> getPostsWithLikes() {
+        return postRepository.findPostsWithLikes();
     }
 
     @Override

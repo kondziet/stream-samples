@@ -41,6 +41,10 @@ public class User implements UserDetails, Serializable {
             inverseJoinColumns = @JoinColumn(name = "POST_ID")
     )
     private Set<Post> likedPosts = new HashSet<>();
+    @EqualsAndHashCode.Exclude
+    @Builder.Default
+    @OneToMany(mappedBy = "author")
+    private Set<Comment> comments = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -44,7 +44,7 @@ function PostCreated() {
                     Share your stream wisdom,
                 </h1>
                 <h2 className="text-3xl font-semibold text-green-500">
-                    inspire others with elegant code solutions!
+                    inspire others with elegant code snippets!
                 </h2>
                 <Post post={createdPost} />
             </div>

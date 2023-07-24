@@ -7,6 +7,7 @@ import Logout from "./pages/Logout";
 import CreatePost from "./pages/CreatePost";
 import PostCreated from "./pages/PostCreated";
 import Register from "./pages/Register";
+import CategoryPost from "./pages/CategoryPosts";
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
       <Sidebar />
       <Routes>
         <Route path="/" element={<Posts />} />
-        <Route path="/categories" element={<Posts />} />
+        <Route path="/categories/:category" element={<CategoryPost />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
